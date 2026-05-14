@@ -37,6 +37,7 @@ class SyslogCollector(LogCollector):
         )
 
     async def collect(self) -> list[LogEntry]:
+        self._seen.clear()
         entries: list[LogEntry] = []
         while not self._queue.empty():
             raw_bytes = self._queue.get_nowait()
